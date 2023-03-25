@@ -1,10 +1,17 @@
 import './screens/LoginScreen';
 import DronezetaRoutes from './screens/Routes';
-import LoginScreen from './screens/LoginScreen';
+import Header from './screens/components/header/Header';
+import Footer from './screens/components/footer/FooterHome';
 
 function App() {
   return (
-    <DronezetaRoutes />
+    <>
+      <div className="app">
+        <Header />
+        <DronezetaRoutes />
+        <Footer />
+      </div>
+    </>
   );
 }
 
