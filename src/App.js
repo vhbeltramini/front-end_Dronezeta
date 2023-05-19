@@ -1,4 +1,4 @@
-import './screens/LoginScreen';
+import './screens/LoginScreen/LoginScreen';
 import DronezetaRoutes from './screens/Routes';
 import Header from './screens/components/header/Header';
 import Footer from './screens/components/footer/FooterHome';

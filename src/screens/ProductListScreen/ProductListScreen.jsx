@@ -1,4 +1,6 @@
 import React from 'react';
+import prod1 from './../../assets/products/1.png';
+import './style.css'
 
 const products = [
   { name: 'Product 1', price: 9.99 },
@@ -7,6 +9,11 @@ const products = [
 ];
 
 function ProductListScreen() {
+  const handleAddToCart = (product) => {
+    console.log(`Product added to cart: ${product.name}`);
+    // Aqui você pode adicionar a lógica para adicionar o produto ao carrinho
+  };
+
   return (
     <div>
       <main>
@@ -14,7 +21,9 @@ function ProductListScreen() {
         <ul>
           {products.map((product) => (
             <li key={product.name}>
+              <img src={prod1} alt="Product" />
               <strong>{product.name}</strong> - ${product.price}
+              <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
             </li>
           ))}
         </ul>

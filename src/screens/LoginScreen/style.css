@@ -1,0 +1,57 @@
+
+.Login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: white;
+}
+
+.SucessoMsg {
+    margin-bottom: 10px;
+    color: green;
+}
+
+.FalhouMsg {
+    margin-bottom: 10px;
+    color: red;
+}
+
+.LoginForm {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.LoginForm div {
+    margin-bottom: 10px;
+}
+
+.LoginForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.LoginForm input[type="text"],
+.LoginForm input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.LoginForm button {
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.LoginForm button:hover {
+    background-color: #45a049;
+}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "./style.css"
 
 function LoginScreen() {
     const [usuario, setUsuario] = useState('')
@@ -39,8 +39,6 @@ function LoginScreen() {
        <div>
          <label>Usuário:</label>
          <input type="text" name="usuario" value={usuario} onChange={usuarioHandler}/>
-
-
        </div>
        <div>
           <label>Senha:</label>

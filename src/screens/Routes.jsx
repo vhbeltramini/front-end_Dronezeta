@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginScreen from "./LoginScreen";
+import LoginScreen from "./LoginScreen/LoginScreen";
 import StartScreen from "./StartScreen/StartScreen";
 import HomeScreen from "./HomeScreen";
-import ProductListScreen from "./ProductListScreen";
+import ProductListScreen from "./ProductListScreen/ProductListScreen";
 
 
 export default function DronezetaRoutes() {
