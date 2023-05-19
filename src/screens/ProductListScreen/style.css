@@ -1,56 +1,74 @@
-.Products {
+.produtos-container {
+    text-align: center;
+  }
+  
+  .produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .produto-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .produto-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .produto-item h2 {
+    margin-top: 10px;
+  }
+  
+  .produto-item p {
+    margin: 5px 0;
+  }
+  
+  .produto-item button {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .produto-item button:hover {
+    background-color: #535e76;
+  }
+  
+  .tamanho-container {
+    display: flex;
     justify-content: center;
-    height: 100vh;
-    background-color: #f2f2f2;
-}
-
-.Products main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.Products h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.Products ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.Products li {
+    margin-top: 10px;
+  }
+  
+  .tamanho-btn {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.Products li img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-}
-
-.Products li strong {
-    flex-grow: 1;
-}
-
-.Products li button {
-    padding: 8px 16px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 3px;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    margin-right: 5px;
+    font-weight: bold;
     cursor: pointer;
-}
-
-.Products li button:hover {
-    background-color: #45a049;
-}
+  }
+  
+  .tamanho-btn:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .tamanho-btn.selecionado {
+    background-color: #7a857b;
+    color: #fff;
+  }

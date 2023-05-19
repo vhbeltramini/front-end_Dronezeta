@@ -1,35 +1,77 @@
-import React from 'react';
-import prod1 from './../../assets/products/1.png';
-import './style.css'
+import React, { useState } from 'react';
+import './style.css';
+import teste from './../../assets/products/1.png';
 
-const products = [
-  { name: 'Product 1', price: 9.99 },
-  { name: 'Product 2', price: 19.99 },
-  { name: 'Product 3', price: 29.99 },
-];
+const Produtos = () => {
+  const [tamanhos, setTamanhos] = useState({});
 
-function ProductListScreen() {
-  const handleAddToCart = (product) => {
-    console.log(`Product added to cart: ${product.name}`);
-    // Aqui você pode adicionar a lógica para adicionar o produto ao carrinho
+  const produtos = [
+    {
+      id: 1,
+      nome: 'Produto 1',
+      preco: 19.99,
+      imagem: teste,
+    },
+    {
+      id: 2,
+      nome: 'Produto 2',
+      preco: 29.99,
+      imagem: teste,
+    },
+    // Adicione mais produtos aqui
+  ];
+
+  const adicionarNoCarrinho = (produtoId) => {
+    const tamanhoSelecionado = tamanhos[produtoId];
+    console.log(`Produto ${produtoId} adicionado ao carrinho com tamanho ${tamanhoSelecionado}`);
+  };
+
+  const handleTamanhoClick = (produtoId, tamanho) => {
+    setTamanhos((prevState) => ({
+      ...prevState,
+      [produtoId]: tamanho,
+    }));
+  };
+
+  const isTamanhoSelecionado = (produtoId, tamanho) => {
+    return tamanhos[produtoId] === tamanho;
   };
 
   return (
-    <div>
-      <main>
-        <h1>Products</h1>
-        <ul>
-          {products.map((product) => (
-            <li key={product.name}>
-              <img src={prod1} alt="Product" />
-              <strong>{product.name}</strong> - ${product.price}
-              <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-            </li>
-          ))}
-        </ul>
-      </main>
+    <div className="produtos-container">
+      <h1>Produtos</h1>
+      <div className="produtos-grid">
+        {produtos.map((produto) => (
+          <div key={produto.id} className="produto-item">
+            <img src={produto.imagem} alt={produto.nome} />
+            <h2>{produto.nome}</h2>
+            <p>R$ {produto.preco}</p>
+            <div className="tamanho-container">
+              <button
+                className={`tamanho-btn ${isTamanhoSelecionado(produto.id, 'P') ? 'selecionado' : ''}`}
+                onClick={() => handleTamanhoClick(produto.id, 'P')}
+              >
+                P
+              </button>
+              <button
+                className={`tamanho-btn ${isTamanhoSelecionado(produto.id, 'M') ? 'selecionado' : ''}`}
+                onClick={() => handleTamanhoClick(produto.id, 'M')}
+              >
+                M
+              </button>
+              <button
+                className={`tamanho-btn ${isTamanhoSelecionado(produto.id, 'G') ? 'selecionado' : ''}`}
+                onClick={() => handleTamanhoClick(produto.id, 'G')}
+              >
+                G
+              </button>
+            </div>
+            <button onClick={() => adicionarNoCarrinho(produto.id)}>Adicionar ao Carrinho</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
 
-export default ProductListScreen;
+export default Produtos;
