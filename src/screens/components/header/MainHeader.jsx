@@ -31,6 +31,7 @@ function Header() {
       <div className="company-name" onClick={redirectToHome}>
         DRONEZETA
       </div>
+
       <div className="header-buttons">
         <a href="/products" className="header-button">
           Produtos
@@ -43,8 +44,10 @@ function Header() {
         
         {!LoggedUser && <a href="/login" className="header-button">Entrar</a>}
         {LoggedUser && (
+          
           <>
             <div className="cart-icon" onClick={redirectToCart}>
+              
               <img src={logo} className="cart-icon" alt="Ícone do Carrinho" />
             </div>  
             <div className="profile-icon" onClick={redirectToProfile}>
