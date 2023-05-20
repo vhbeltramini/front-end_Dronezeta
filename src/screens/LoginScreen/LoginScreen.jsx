@@ -3,7 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./LoginScreen.css"
 
-var globalLoggedUser;
+var globalLoggedUser = {
+  firstName: '',
+  lastName: '',
+  cpf: '',
+  email: '',
+  password: '',
+  address: '',
+  deliveryAddress: '',
+  paymentMethodList: '',
+  role: '',
+};
 
 function LoginScreen() {
 
@@ -100,8 +110,18 @@ function LoginScreen() {
   function signInHandler() {
     navigate('/createUser');
   }
-    
+
+  if (globalLoggedUser.role != null) {
+    return (
+      <div className="container">
+        <div className="Login">
+          <h1>Você já está logado</h1>
+        </div>
+      </div>
+    )
+  }
   return (
+    
     <div className="container">
       <div className="Login">
         {loginSucesso && <div className="SucessoMsg"> Autenticado com sucesso!</div> }
