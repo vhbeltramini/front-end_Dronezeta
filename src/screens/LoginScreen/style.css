@@ -52,6 +52,11 @@
     cursor: pointer;
 }
 
+.LoginButtons {
+    display: flex;
+    justify-content: space-around;
+}
+
 .LoginForm button:hover {
     background-color: #45a049;
 }

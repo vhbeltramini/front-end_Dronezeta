@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./style.css"
 
 function LoginScreen() {
@@ -19,16 +20,23 @@ function LoginScreen() {
  
  
     function loginHandler() {
-        if (usuario === 'admin' && senha === '1234') {
-            console.log('sucesso');
-            setLoginSucesso(true);
-            setLoginFalhou(false);
-        } else {
-            console.log('falhou');
-            setLoginFalhou(true);
-            setLoginSucesso(false);
-        }
-    }
+      if (usuario === 'admin' && senha === '1234') {
+          console.log('sucesso');
+          setLoginSucesso(true);
+          setLoginFalhou(false);
+      } else {
+          console.log('falhou');
+          setLoginFalhou(true);
+          setLoginSucesso(false);
+      }
+  }
+
+  const navigate = useNavigate();
+
+ 
+  function signInHandler() {
+    navigate('/createUser');
+  }
     
   return (
     <div className="Login">
@@ -44,9 +52,11 @@ function LoginScreen() {
           <label>Senha:</label>
            <input type="password" name="senha" value={senha} onChange={senhaHandler}/>
        </div>
-       <div>
+       <div className="LoginButtons">
         <button type="button" name="login" onClick={loginHandler}>
-          Login</button>
+          Entrar</button>
+        <button type="button" name="signin" onClick={signInHandler}>
+          Cadastrar</button>
        </div>
        </div>
      </div>
