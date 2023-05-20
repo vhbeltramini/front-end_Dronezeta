@@ -7,6 +7,7 @@ import CreateUser from "./CreateUser/CreateUser";
 import CreateProduct from "./CreateProduct/CreateProduct";
 import Cart from "./Cart/Cart";
 import PaymentForm from "./PaymentForm/PaymentForm";
+import AddressForm from "./AddressForm/AddressForm";
 
 export default function DronezetaRoutes() {
     return (
@@ -19,8 +20,9 @@ export default function DronezetaRoutes() {
             <Route path='/products' element={<ProductListScreen />}></Route>
             <Route path='/createUser' element={<CreateUser />}></Route>
             <Route path='/createProduct' element={<CreateProduct />}></Route>
-            <Route path='/Cart' element={<Cart />}></Route>
-            <Route path='/PaymentForm' element={<PaymentForm />}></Route>
+            <Route path='/cart' element={<Cart />}></Route>
+            <Route path='/paymentForm' element={<PaymentForm />}></Route>
+            <Route path='/addressForm' element={<AddressForm />}></Route>
 
             <Route path='*' element={<HomeScreen />}></Route>
           </Routes>
