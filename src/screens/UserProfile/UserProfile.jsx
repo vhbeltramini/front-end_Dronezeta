@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import './UserProfile.css';
 
@@ -6,32 +6,32 @@ const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [editedUser, setEditedUser] = useState(null);
     const LoggedUser = JSON.parse(localStorage.getItem("user"));
+    const previousUserId = useRef(null);
 
     useEffect(() => {
-    let isMounted = true; // Flag to track component mount status
-    let previousUserId = null; // Variable to store the previously fetched user ID
-      
+        let isMounted = true; // Flag to track component mount status
+    
         const fetchUser = async () => {
           try {
             const response = await axios.get(`http://localhost:8080/users/${LoggedUser.id}`);
             if (isMounted) {
               setUser(response.data);
               setEditedUser(response.data);
+              previousUserId.current = LoggedUser.id; // Update the previous user ID
             }
           } catch (error) {
             console.error('Error occurred while fetching user:', error);
           }
         };
-      
-        if (user == null || user != null && user.id && user.id !== previousUserId) {
+    
+        if (user == null || (user != null && user.id && user.id !== previousUserId.current)) {
           fetchUser();
-          previousUserId = LoggedUser.id; // Update the previous user ID
         }
-      
+    
         return () => {
           isMounted = false; // Clean up: set isMounted to false on component unmount
         };
-      }, [LoggedUser]);
+    }, [LoggedUser]);
       
       
 
