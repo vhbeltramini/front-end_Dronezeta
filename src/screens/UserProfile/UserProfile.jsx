@@ -42,10 +42,17 @@ const ProfilePage = () => {
         [name]: value,
         }));
     };
+    const token = localStorage.getItem("token");
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      };
+      
 
     const saveChanges = async () => {
         try {
-        await axios.put(`http://localhost:8080/users/${LoggedUser.id}`, editedUser);
+        await axios.put(`http://localhost:8080/users/${LoggedUser.id}`, editedUser, {headers})
+        ;
         setUser(editedUser);
         console.log('Changes saved successfully!');
         } catch (error) {
@@ -114,7 +121,7 @@ const ProfilePage = () => {
                 onChange={handleInputChange}
                 />
             </label>
-            <button onClick={saveChanges}>Save Changes</button>
+            <button onClick={saveChanges}>Atualizar informações</button>
         </div>
     );
 };

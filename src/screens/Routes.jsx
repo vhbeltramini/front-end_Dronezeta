@@ -15,7 +15,7 @@ export default function DronezetaRoutes() {
       <div className="DronezetaRoutes">
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<StartScreen />}></Route>
+            <Route path='/' element={<ProductListScreen />}></Route>
             <Route path='/login' element={<LoginScreen />}></Route>
             <Route path='/inicio' element={<StartScreen />}></Route>
             <Route path='/products' element={<ProductListScreen />}></Route>
@@ -26,7 +26,7 @@ export default function DronezetaRoutes() {
             <Route path='/addressForm' element={<AddressForm />}></Route>
             <Route path='/userProfile' element={<UserProfile />}></Route>
 
-            <Route path='*' element={<HomeScreen />}></Route>
+            <Route path='*' element={<ProductListScreen />}></Route>
           </Routes>
         </BrowserRouter>
       </div>
