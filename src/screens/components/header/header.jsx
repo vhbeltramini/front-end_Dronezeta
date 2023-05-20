@@ -9,6 +9,7 @@ function Header() {
   const [showCart, setShowCart] = useState(false);
 
   const toggleCart = () => {
+    
     setShowCart(!showCart);
   };
 
