@@ -42,7 +42,7 @@ const CadastroCliente = () => {
     cliente.cpf = formatedCPF;
 
     const request = {
-      url: "http://localhost:8080/login/user",
+      url: "http://localhost:8080/login/users",
       mode: 'no-cors',
       method: "POST",
       headers: {
