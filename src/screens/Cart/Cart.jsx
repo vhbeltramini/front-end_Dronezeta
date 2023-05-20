@@ -5,7 +5,7 @@ class CarrinhoDeCompra extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      produtos: [] // carregar com os produtos selecionados
+      produtos: JSON.parse(localStorage.getItem("cart")) || [] // carregar com os produtos selecionados
     };
   }
 

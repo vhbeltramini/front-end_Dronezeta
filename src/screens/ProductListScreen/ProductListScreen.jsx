@@ -5,6 +5,7 @@ import './ProductListScreen.css';
 const Produtos = () => {
   const [produtos, setProdutos] = useState([]);
   const [tamanhos, setTamanhos] = useState({});
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -22,7 +23,20 @@ const Produtos = () => {
 
   const adicionarNoCarrinho = (produtoId) => {
     const tamanhoSelecionado = tamanhos[produtoId];
+    const produtoSelecionado = produtos.find((produto) => produto.id === produtoId);
+
+    const novoItem = {
+      id: produtoId,
+      nome: produtoSelecionado.name,
+      preco: produtoSelecionado.price,
+      tamanho: tamanhoSelecionado,
+    };
+
+    const updatedCart = [...cart, novoItem];
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+
     console.log(`Produto ${produtoId} adicionado ao carrinho com tamanho ${tamanhoSelecionado}`);
+    console.log(updatedCart);
   };
 
   const handleTamanhoClick = (produtoId, tamanho) => {
