@@ -5,7 +5,13 @@ import './Footer.css';
 function Footer() {
   return (
     <footer>
-      <p>&copy; 2023 Dronezeta</p>
+      
+      <div className='others'>
+        <a href="/">Sobre nós</a>
+      </div>
+      <div className='copyright'>
+        <p>&copy; 2023 Dronezeta</p>
+      </div>
     </footer>
   );
 }

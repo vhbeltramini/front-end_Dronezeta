@@ -2,10 +2,33 @@ footer {
     background-color: #333;
     color: white;
     height: 60px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
+.copyright {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-right: 30px;
+}
+
+.others {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-left: 30px;
+}
+  
+
   
   p {
     margin: 0;
