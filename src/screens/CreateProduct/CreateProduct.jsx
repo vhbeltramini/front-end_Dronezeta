@@ -31,20 +31,15 @@ const ProductForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('price', price);
-    formData.append('productStorages[0][quantity]', quantity);
-    formData.append('productStorages[0][size]', size);
-    formData.append('photoUrl', photoUrl);
+    const productStorage = { quantity, size };
+    const productData = { name, price, productStorages: [productStorage], photoUrl };
 
     const url = "http://localhost:8080/products";
 
     try {
-      const response = await axios.post(url, formData, {
+      const response = await axios.post(url, productData, {
         headers: {
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "application/json"
         }
       });
 
