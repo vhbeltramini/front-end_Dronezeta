@@ -35,12 +35,18 @@ function Header() {
         <a href="/products" className="header-button">
           Produtos
         </a>
-        <div className="cart-icon" onClick={redirectToCart}>
-          <img src={logo} className="cart-icon" alt="Ícone do Carrinho" />
-        </div>
+        {LoggedUser && (
+        <a href="/my-orders" className="header-button">
+          Meus Pedidos
+        </a>
+        )} 
+        
         {!LoggedUser && <a href="/login" className="header-button">Entrar</a>}
         {LoggedUser && (
           <>
+            <div className="cart-icon" onClick={redirectToCart}>
+              <img src={logo} className="cart-icon" alt="Ícone do Carrinho" />
+            </div>  
             <div className="profile-icon" onClick={redirectToProfile}>
               <img src={profileIcon} className="profile-icon" alt="Ícone do Perfil" />
             </div>
