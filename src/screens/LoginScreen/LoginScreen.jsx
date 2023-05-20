@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./LoginScreen.css"
 
-
-
 const LoginScreen = () => {
 
   const [login, setLogin] = useState({
@@ -55,9 +53,10 @@ const LoginScreen = () => {
           
           console.log('POST request successful');
           setLoginSucesso(true);
-          setTimeout(() => {
-            navigate('/products');
-          }, 2000);
+          window.location.reload();
+          // setTimeout(() => {
+          //   navigate('/products');
+          // }, 2000);
 
         } else {
           console.log('POST request failed');
