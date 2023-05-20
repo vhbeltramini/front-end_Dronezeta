@@ -23,6 +23,20 @@ input[type="text"] {
     border-radius: 4px;
 }
 
+input[type="password"] {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="email"] {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 button[type="submit"] {
     margin-top: 20px;
     padding: 8px 16px;
