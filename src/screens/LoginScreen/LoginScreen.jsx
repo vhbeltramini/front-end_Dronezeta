@@ -91,7 +91,10 @@ const LoginScreen = () => {
         const response = await axios.post(request.url, request.body, { headers });
         
         if (response.status == 200) {
-          globalLoggedUser = response.data.user
+          
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+          
 
           console.log(globalLoggedUser)
           if (globalLoggedUser.role != '') {
@@ -122,8 +125,10 @@ const LoginScreen = () => {
     navigate('/createUser');
   }
 
-
-  if (apiData.role != '') {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user.role != '') {
+    console.log("user from local storage")
+    console.log(user)
     return (
       <div className="container">
         <div className="Login">

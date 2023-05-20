@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import './CreateProduct.css';
-import { ApiContext } from './../components/ApiContext/ApiProvider';
 
 
 const ProductForm = () => {
@@ -64,11 +63,13 @@ const ProductForm = () => {
     // setPrice('');
     // setQuantity('');
   };
-  const { apiData } = useContext(ApiContext);
 
-  
-  if (apiData.role != 'ADMIN') {
-    console.log(apiData.role);
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log("user from local storage")
+  console.log(user)
+  console.log(user.role)
+  if (user.role != 'ADMIN') {
+    console.log(user.role);
     return (
       <div className="container">
         <div className="Login">
