@@ -66,9 +66,8 @@ const ProductForm = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   console.log("user from local storage")
-  console.log(user)
-  console.log(user.role)
-  if (user.role != 'ADMIN') {
+
+  if (user != null && user.role != 'ADMIN') {
     console.log(user.role);
     return (
       <div className="container">
