@@ -20,6 +20,8 @@ const LoginScreen = () => {
 
     const [loginSucesso, setLoginSucesso] = useState(false)
     const [loginFalhou, setLoginFalhou] = useState(false)
+
+    
  
   const loginHandler = async (event) => {
 
@@ -54,10 +56,12 @@ const LoginScreen = () => {
           console.log('POST request successful');
           setLoginFalhou(false);
           setLoginSucesso(true);
+          
           window.location.reload();
-          // setTimeout(() => {
-          //   navigate('/products');
-          // }, 2000);
+
+          setTimeout(() => {
+            navigate('/products');
+          }, 2000);
 
         } else if (response.status == 401) {
           console.log('POST request failed');

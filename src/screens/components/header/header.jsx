@@ -2,6 +2,7 @@ import React from 'react';
 import './Header.css';
 import logo from  '../../../assets/images/shopping-cart.png'
 import profileIcon from '../../../assets/images/profile.png';
+import logoutIcon from '../../../assets/images/logout-icon.png';
 
 function Header() {
 
@@ -34,18 +35,21 @@ function Header() {
         <a href="/products" className="header-button">
           Produtos
         </a>
-        {!LoggedUser && <a href="/login" className="header-button">Login</a>}
-        {LoggedUser && (
-          <>
-            <button onClick={handleLogout} className="header-button">Logout</button>
-            <div className="profile-icon" onClick={redirectToProfile}>
-              <img src={profileIcon} className="profile-icon" alt="Ícone do Perfil" />
-            </div>
-          </>
-        )}
         <div className="cart-icon" onClick={redirectToCart}>
           <img src={logo} className="cart-icon" alt="Ícone do Carrinho" />
         </div>
+        {!LoggedUser && <a href="/login" className="header-button">Entrar</a>}
+        {LoggedUser && (
+          <>
+            <div className="profile-icon" onClick={redirectToProfile}>
+              <img src={profileIcon} className="profile-icon" alt="Ícone do Perfil" />
+            </div>
+            <div className="logout-icon" onClick={handleLogout}>
+              <img src={logoutIcon} className="profile-icon" alt="Ícone do Perfil" />
+            </div>
+          </>
+        )}
+        
       </div>
     </header>
   );
