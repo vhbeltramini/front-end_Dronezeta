@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './style.css';
+import './CreateUser.css';
 
 const CadastroCliente = () => {
   const [cliente, setCliente] = useState({
@@ -26,7 +26,7 @@ const CadastroCliente = () => {
   };
 
   return (
-    <div>
+    <div className='container'>
       <h1>Cadastro de Cliente</h1>
       <form onSubmit={handleSubmit}>
         <label>
