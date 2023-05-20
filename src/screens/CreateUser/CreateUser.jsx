@@ -60,11 +60,8 @@ const CadastroCliente = () => {
       const response = await axios.post(request.url, request);
       
       if (response.ok) {
-        // Request was successful
         console.log('POST request successful');
-        // Perform any further actions or handle the response data here
       } else {
-        // Request was not successful
         console.log('POST request failed');
         console.log(response);
       }
