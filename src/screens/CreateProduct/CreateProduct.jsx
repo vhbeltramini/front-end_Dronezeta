@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import './CreateProduct.css';
+import { ApiContext } from './../components/ApiContext/ApiProvider';
+
 
 const ProductForm = () => {
   const [name, setName] = useState('');
@@ -62,7 +64,19 @@ const ProductForm = () => {
     // setPrice('');
     // setQuantity('');
   };
+  const { apiData } = useContext(ApiContext);
 
+  
+  if (apiData.role != 'ADMIN') {
+    console.log(apiData.role);
+    return (
+      <div className="container">
+        <div className="Login">
+          <h1>Você não possui permissões para cadastrar produtos, solicite a um administrador</h1>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className='container'>
       <form onSubmit={handleSubmit}>

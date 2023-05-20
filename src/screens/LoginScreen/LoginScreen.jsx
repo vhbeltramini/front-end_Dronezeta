@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { ApiContext } from './../components/ApiContext/ApiProvider';
 import axios from 'axios';
 import "./LoginScreen.css"
 
@@ -15,7 +16,7 @@ var globalLoggedUser = {
   role: '',
 };
 
-function LoginScreen() {
+const LoginScreen = () => {
 
   const [loggedUser, setLoggedUser] = useState({
     firstName: '',
@@ -56,9 +57,15 @@ function LoginScreen() {
     const [loginSucesso, setLoginSucesso] = useState(false)
     const [loginFalhou, setLoginFalhou] = useState(false)
  
+  const { updateApiData, apiData } = useContext(ApiContext);
+
+
+  console.log("apiData");
+  console.log(apiData);
  
  
   const loginHandler = async (event) => {
+
       event.preventDefault();
   
       const headers = {
@@ -87,6 +94,10 @@ function LoginScreen() {
           globalLoggedUser = response.data.user
 
           console.log(globalLoggedUser)
+          if (globalLoggedUser.role != '') {
+            updateApiData(globalLoggedUser)
+          }
+
 
           console.log('POST request successful');
           setLoginSucesso(true);
@@ -111,11 +122,12 @@ function LoginScreen() {
     navigate('/createUser');
   }
 
-  if (globalLoggedUser.role != null) {
+
+  if (apiData.role != '') {
     return (
       <div className="container">
         <div className="Login">
-          <h1>Você já está logado</h1>
+          <h1>Você está logado</h1>
         </div>
       </div>
     )
