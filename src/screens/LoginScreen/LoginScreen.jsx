@@ -56,13 +56,6 @@ const LoginScreen = () => {
     const [loginSucesso, setLoginSucesso] = useState(false)
     const [loginFalhou, setLoginFalhou] = useState(false)
  
-  const { updateApiData, apiData } = useContext(ApiContext);
-
-
-  console.log("apiData");
-  console.log(apiData);
- 
- 
   const loginHandler = async (event) => {
 
       event.preventDefault();
@@ -94,13 +87,6 @@ const LoginScreen = () => {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("user", JSON.stringify(response.data.user));
           
-
-          console.log(globalLoggedUser)
-          if (globalLoggedUser.role != '') {
-            updateApiData(globalLoggedUser)
-          }
-
-
           console.log('POST request successful');
           setLoginSucesso(true);
           setTimeout(() => {
