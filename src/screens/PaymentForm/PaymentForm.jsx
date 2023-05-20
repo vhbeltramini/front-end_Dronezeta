@@ -4,11 +4,12 @@ import axios from 'axios';
 
 function PaymentForm() {
     const [cardNumber, setCardNumber] = useState('');
-    const [cardName, setCardName] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
+    const [cardHolderName, setCardName] = useState('');
+    const [validDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
     const [paymentMethods, setPaymentMethods] = useState([]);
     const user = JSON.parse(localStorage.getItem('user'));
+    const cart = JSON.parse(localStorage.getItem('cart'));
 
     useEffect(() => {
         const fetchPaymentMethods = async () => {
@@ -44,15 +45,31 @@ function PaymentForm() {
         event.preventDefault();
        
         try {
+            //gravar forma de pagamento
             const response = await axios.post('http://localhost:8080/payment-methods/create', {
                 cardNumber,
-                cardName,
-                expiryDate,
+                cardHolderName,
+                validDate,
                 cvv,
                 id: user.id
             });
-            
             console.log('Resposta do servidor:', response.data);
+            //gravar lista de produtos do pedido
+            // const response2 = await axios.post('http://localhost:8080/orders', {
+            //     cardNumber,
+            //     cardName,
+            //     expiryDate,
+            //     cvv,
+            //     id: user.id
+            // });
+            // //gravar pedido completo
+            // const response3 = await axios.post('http://localhost:8080/orders', {
+            //     cardNumber,
+            //     cardName,
+            //     expiryDate,
+            //     cvv,
+            //     id: user.id
+            // });
             
             // Limpar os campos após o envio
             setCardNumber('');
@@ -86,7 +103,7 @@ function PaymentForm() {
                     Nome no Cartão:
                     <input
                         type="text"
-                        value={cardName}
+                        value={cardHolderName}
                         onChange={handleCardNameChange}
                     />
                 </label>
@@ -94,7 +111,7 @@ function PaymentForm() {
                     Data de Expiração:
                     <input
                         type="text"
-                        value={expiryDate}
+                        value={validDate}
                         onChange={handleExpiryDateChange}
                     />
                 </label>
