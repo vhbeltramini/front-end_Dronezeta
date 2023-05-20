@@ -3,48 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./LoginScreen.css"
 
-var globalLoggedUser = {
-  firstName: '',
-  lastName: '',
-  cpf: '',
-  email: '',
-  password: '',
-  address: '',
-  deliveryAddress: '',
-  paymentMethodList: '',
-  role: '',
-};
+
 
 const LoginScreen = () => {
-
-  const [loggedUser, setLoggedUser] = useState({
-    firstName: '',
-    lastName: '',
-    cpf: '',
-    email: '',
-    password: '',
-    address: '',
-    deliveryAddress: '',
-    paymentMethodList: '',
-    role: '',
-  });
-  
-  
-  const handleLoggedUserState = (event) => {
-    const { name, value } = event.target;
-    setLoggedUser((prevCliente) => ({
-      ...prevCliente,
-      [name]: value,
-    }));
-  };
 
   const [login, setLogin] = useState({
     email: '',
     password: ''
   });
 
-  
-  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setLogin((prevLogin) => ({
@@ -53,8 +20,8 @@ const LoginScreen = () => {
     }));
   };
 
-    const [loginSucesso, setLoginSucesso] = useState(false)
-    const [loginFalhou, setLoginFalhou] = useState(false)
+  const [loginSucesso, setLoginSucesso] = useState(false)
+  const [loginFalhou, setLoginFalhou] = useState(false)
  
   const loginHandler = async (event) => {
 
@@ -77,7 +44,6 @@ const LoginScreen = () => {
   
       console.log('request:');
       console.log(request);
-      
       
       try {
         const response = await axios.post(request.url, request.body, { headers });
@@ -111,7 +77,7 @@ const LoginScreen = () => {
   }
 
   const user = JSON.parse(localStorage.getItem("user"));
-  if (user.role != '') {
+  if (user != null && user.role != '') {
     console.log("user from local storage")
     console.log(user)
     return (

@@ -5,12 +5,14 @@ import './UserProfile.css';
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [editedUser, setEditedUser] = useState(null);
-    const globalLoggedUser = localStorage.getItem('globalLoggedUser');
+    const LoggedUser = localStorage.getItem('user');
 
+    //console.log(LoggedUser)
     useEffect(() => {
         const fetchUser = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/users/${globalLoggedUser.id}`);
+            const response = await axios.get(`http://localhost:8080/users/${LoggedUser.id}`);
+            console.log(response.data)
             setUser(response.data);
             setEditedUser(response.data);
         } catch (error) {
@@ -18,10 +20,10 @@ const ProfilePage = () => {
         }
         };
 
-        if (globalLoggedUser) {
-        fetchUser();
+        if (LoggedUser) {
+            fetchUser();
         }
-    }, [globalLoggedUser]);
+    }, [LoggedUser]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -33,7 +35,7 @@ const ProfilePage = () => {
 
     const saveChanges = async () => {
         try {
-        await axios.put(`http://localhost:8080/users/${globalLoggedUser.id}`, editedUser);
+        await axios.put(`http://localhost:8080/users/${LoggedUser.id}`, editedUser);
         setUser(editedUser);
         console.log('Changes saved successfully!');
         } catch (error) {
@@ -47,62 +49,62 @@ const ProfilePage = () => {
 
     return (
         <div className='profile-container'>
-        <h1>Profile</h1>
-        <label>
-            First Name:
-            <input
-            type="text"
-            name="firstName"
-            value={editedUser.firstName}
-            onChange={handleInputChange}
-            />
-        </label>
-        <label>
-            Last Name:
-            <input
-            type="text"
-            name="lastName"
-            value={editedUser.lastName}
-            onChange={handleInputChange}
-            />
-        </label>
-        <label>
-            CPF:
-            <input
-            type="text"
-            name="cpf"
-            value={editedUser.cpf}
-            onChange={handleInputChange}
-            />
-        </label>
-        <label>
-            Email:
-            <input
-            type="email"
-            name="email"
-            value={editedUser.email}
-            onChange={handleInputChange}
-            />
-        </label>
-        <label>
-            Address:
-            <input
-            type="text"
-            name="address"
-            value={editedUser.address}
-            onChange={handleInputChange}
-            />
-        </label>
-        <label>
-            Delivery Address:
-            <input
-            type="text"
-            name="deliveryAddress"
-            value={editedUser.deliveryAddress}
-            onChange={handleInputChange}
-            />
-        </label>
-        <button onClick={saveChanges}>Save Changes</button>
+            <h1>Profile</h1>
+            <label>
+                First Name:
+                <input
+                type="text"
+                name="firstName"
+                value={editedUser.firstName}
+                onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                Last Name:
+                <input
+                type="text"
+                name="lastName"
+                value={editedUser.lastName}
+                onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                CPF:
+                <input
+                type="text"
+                name="cpf"
+                value={editedUser.cpf}
+                onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                Email:
+                <input
+                type="email"
+                name="email"
+                value={editedUser.email}
+                onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                Address:
+                <input
+                type="text"
+                name="address"
+                value={editedUser.address}
+                onChange={handleInputChange}
+                />
+            </label>
+            <label>
+                Delivery Address:
+                <input
+                type="text"
+                name="deliveryAddress"
+                value={editedUser.deliveryAddress}
+                onChange={handleInputChange}
+                />
+            </label>
+            <button onClick={saveChanges}>Save Changes</button>
         </div>
     );
 };
