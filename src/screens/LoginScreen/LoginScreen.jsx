@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./LoginScreen.css"
 
+  
+  
 const LoginScreen = () => {
 
   const [login, setLogin] = useState({
@@ -18,8 +20,8 @@ const LoginScreen = () => {
     }));
   };
 
-  const [loginSucesso, setLoginSucesso] = useState(false)
-  const [loginFalhou, setLoginFalhou] = useState(false)
+    const [loginSucesso, setLoginSucesso] = useState(false)
+    const [loginFalhou, setLoginFalhou] = useState(false)
  
   const loginHandler = async (event) => {
 
@@ -45,26 +47,30 @@ const LoginScreen = () => {
       
       try {
         const response = await axios.post(request.url, request.body, { headers });
-        
+        console.log('response:', response);
         if (response.status == 200) {
           
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("user", JSON.stringify(response.data.user));
           
           console.log('POST request successful');
+          setLoginFalhou(false);
           setLoginSucesso(true);
           window.location.reload();
           // setTimeout(() => {
           //   navigate('/products');
           // }, 2000);
 
-        } else {
+        } else if (response.status == 401) {
           console.log('POST request failed');
           console.log(response);
-          setLoginFalhou(false);
+          setLoginFalhou(true);
         }
   
       } catch (error) {
+        setLoginFalhou(true);
+        setLoginSucesso(false);
+
         console.error('Error occurred during POST request:', error);
       }
   }
