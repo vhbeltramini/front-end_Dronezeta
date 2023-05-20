@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import './CreateProduct.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const ProductForm = () => {
@@ -46,8 +47,13 @@ const ProductForm = () => {
 
       console.log('response:', response.data);
 
-      if (response.status === 200) {
+
+
+
+      if (response.status === 201) {
         console.log('POST request successful');
+        alert("Produto adicionado")
+
       } else {
         console.log('POST request failed');
         console.log(response);
@@ -100,7 +106,7 @@ const ProductForm = () => {
           <label htmlFor="quantity">Quantidade:</label>
           <input type="text" id="quantity" value={quantity} onChange={handleQuantityChange} />
         </div>
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Cadastrar / Atualizar</button>
       </form>
     </div>
   );

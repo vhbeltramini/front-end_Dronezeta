@@ -53,6 +53,19 @@ const Produtos = () => {
     return tamanhos[produtoId] === tamanho;
   };
 
+  function getHasSizeFromProduct(product, size) {
+    if (product != null && product.productStorages && product.productStorages.length > 0) {
+      for (let i = 0; i < product.productStorages.length; i++) {
+        console.log(product.productStorages[i].size)
+        if(product.productStorages[i].size == size) {
+          return true;
+        }
+      }
+    }
+    return false;
+    
+  }
+
   return (
     <div className="produtos-container">
       <h1>Produtos</h1>
@@ -66,24 +79,24 @@ const Produtos = () => {
             <h2>{produto.name}</h2>
             <p>R$ {produto.price}</p>
             <div className="tamanho-container">
-              <button
+              {getHasSizeFromProduct(produto, "P") &&  <button
                 className={`tamanho-btn ${isTamanhoSelecionado(produto.id, 'P') ? 'selecionado' : ''}`}
                 onClick={() => handleTamanhoClick(produto.id, 'P')}
               >
                 P
-              </button>
-              <button
+              </button>}
+              {getHasSizeFromProduct(produto, "M") &&  <button
                 className={`tamanho-btn ${isTamanhoSelecionado(produto.id, 'M') ? 'selecionado' : ''}`}
                 onClick={() => handleTamanhoClick(produto.id, 'M')}
               >
                 M
-              </button>
-              <button
+              </button>}
+              {getHasSizeFromProduct(produto, "G") &&  <button
                 className={`tamanho-btn ${isTamanhoSelecionado(produto.id, 'G') ? 'selecionado' : ''}`}
                 onClick={() => handleTamanhoClick(produto.id, 'G')}
               >
                 G
-              </button>
+              </button>}
             </div>
             <button onClick={() => adicionarNoCarrinho(produto.id)}>Adicionar ao Carrinho</button>
           </div>
