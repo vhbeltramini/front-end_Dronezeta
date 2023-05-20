@@ -1,25 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './ProductListScreen.css';
-import teste from './../../assets/products/1.png';
 
 const Produtos = () => {
+  const [produtos, setProdutos] = useState([]);
   const [tamanhos, setTamanhos] = useState({});
 
-  const produtos = [
-    {
-      id: 1,
-      nome: 'Produto 1',
-      preco: 19.99,
-      imagem: teste,
-    },
-    {
-      id: 2,
-      nome: 'Produto 2',
-      preco: 29.99,
-      imagem: teste,
-    },
-    // Adicione mais produtos aqui
-  ];
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/products');
+        console.log(response.data);
+        setProdutos(response.data);
+      } catch (error) {
+        console.error('Error occurred while fetching products:', error);
+      }
+    };
+
+    fetchProdutos();
+  }, []);
 
   const adicionarNoCarrinho = (produtoId) => {
     const tamanhoSelecionado = tamanhos[produtoId];
@@ -43,9 +42,9 @@ const Produtos = () => {
       <div className="produtos-grid">
         {produtos.map((produto) => (
           <div key={produto.id} className="produto-item">
-            <img src={produto.imagem} alt={produto.nome} />
-            <h2>{produto.nome}</h2>
-            <p>R$ {produto.preco}</p>
+            <img src={produto.photoUrl} alt={produto.nome} />
+            <h2>{produto.name}</h2>
+            <p>R$ {produto.price}</p>
             <div className="tamanho-container">
               <button
                 className={`tamanho-btn ${isTamanhoSelecionado(produto.id, 'P') ? 'selecionado' : ''}`}
