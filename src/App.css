@@ -41,3 +41,24 @@
     transform: rotate(360deg);
   }
 }
+
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+} 
+
+.content {
+  padding-bottom: 100px; /* Adjust this value to match the height of your footer */
+}
+
+.wrapper {
+  min-height: 100%;
+  position: relative;
+}

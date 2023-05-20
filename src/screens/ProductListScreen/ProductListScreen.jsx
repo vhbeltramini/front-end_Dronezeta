@@ -6,6 +6,9 @@ const Produtos = () => {
   const [produtos, setProdutos] = useState([]);
   const [tamanhos, setTamanhos] = useState({});
 
+  const LoggedUser = JSON.parse(localStorage.getItem('user'));
+
+
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
@@ -39,6 +42,9 @@ const Produtos = () => {
   return (
     <div className="produtos-container">
       <h1>Produtos</h1>
+      <div className="buttons">
+        {LoggedUser && LoggedUser.role == 'ADMIN' &&  <a href="/createProduct" className="header-button">Adicionar produtos</a>}
+      </div>
       <div className="produtos-grid">
         {produtos.map((produto) => (
           <div key={produto.id} className="produto-item">
