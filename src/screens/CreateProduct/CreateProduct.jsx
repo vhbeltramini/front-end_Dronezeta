@@ -1,79 +1,98 @@
 import React, { useState } from 'react';
-import './CreateProduct.css'
+import axios from 'axios';
+import './CreateProduct.css';
 
 const ProductForm = () => {
-  const [nome, setNome] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [imagem, setImagem] = useState(null);
-  const [tamanho, setTamanho] = useState('');
-  const [preco, setPreco] = useState('');
-  const [quantidade, setQuantidade] = useState('');
+  const [name, setName] = useState('');
+  const [photoUrl, setPhotoUrl] = useState(null);
+  const [size, setSize] = useState('');
+  const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState('');
 
-  const handleNomeChange = (event) => {
-    setNome(event.target.value);
+  const handleNameChange = (event) => {
+    setName(event.target.value);
   };
 
-  const handleDescricaoChange = (event) => {
-    setDescricao(event.target.value);
+  const handlePhotoUrlChange = (event) => {
+    setPhotoUrl(event.target.files[0]);
   };
 
-  const handleImagemChange = (event) => {
-    setImagem(event.target.files[0]);
+  const handleSizeChange = (event) => {
+    setSize(event.target.value);
   };
 
-  const handleTamanhoChange = (event) => {
-    setTamanho(event.target.value);
+  const handlePriceChange = (event) => {
+    setPrice(event.target.value);
   };
 
-  const handlePrecoChange = (event) => {
-    setPreco(event.target.value);
+  const handleQuantityChange = (event) => {
+    setQuantity(event.target.value);
   };
 
-  const handleQuantidadeChange = (event) => {
-    setQuantidade(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // salvar produto no banco;
 
-    setNome('');
-    setDescricao('');
-    setImagem(null);
-    setTamanho('');
-    setPreco('');
-    setQuantidade('');
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('price', price);
+    formData.append('productStorages[0][quantity]', quantity);
+    formData.append('productStorages[0][size]', size);
+    formData.append('photoUrl', photoUrl);
+
+    const url = "http://localhost:8080/products";
+
+    try {
+      const response = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
+      console.log('response:', response.data);
+
+      if (response.status === 200) {
+        console.log('POST request successful');
+      } else {
+        console.log('POST request failed');
+        console.log(response);
+      }
+
+    } catch (error) {
+      console.error('Error occurred during POST request:', error);
+    }
+
+    setName('');
+    setPhotoUrl(null);
+    setSize('');
+    setPrice('');
+    setQuantity('');
   };
 
   return (
     <div className='container'>
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div>
-            <label htmlFor="nome">Nome:</label>
-            <input type="text" id="nome" value={nome} onChange={handleNomeChange} />
+          <label htmlFor="name">Nome:</label>
+          <input type="text" id="name" value={name} onChange={handleNameChange} />
         </div>
         <div>
-            <label htmlFor="descricao">Descrição:</label>
-            <textarea id="descricao" value={descricao} onChange={handleDescricaoChange} />
+          <label htmlFor="photoUrl">Imagem:</label>
+          <input type="file" id="photoUrl" onChange={handlePhotoUrlChange} />
         </div>
         <div>
-            <label htmlFor="imagem">Imagem:</label>
-            <input type="file" id="imagem" onChange={handleImagemChange} />
+          <label htmlFor="size">Tamanho:</label>
+          <input type="text" id="size" value={size} onChange={handleSizeChange} />
         </div>
         <div>
-            <label htmlFor="tamanho">Tamanho:</label>
-            <input type="text" id="tamanho" value={tamanho} onChange={handleTamanhoChange} />
+          <label htmlFor="price">Preço:</label>
+          <input type="text" id="price" value={price} onChange={handlePriceChange} />
         </div>
         <div>
-            <label htmlFor="preco">Preço:</label>
-            <input type="text" id="preco" value={preco} onChange={handlePrecoChange} />
-        </div>
-        <div>
-            <label htmlFor="quantidade">Quantidade:</label>
-            <input type="text" id="quantidade" value={quantidade} onChange={handleQuantidadeChange} />
+          <label htmlFor="quantity">Quantidade:</label>
+          <input type="text" id="quantity" value={quantity} onChange={handleQuantityChange} />
         </div>
         <button type="submit">Cadastrar</button>
-        </form>
+      </form>
     </div>
   );
 };
