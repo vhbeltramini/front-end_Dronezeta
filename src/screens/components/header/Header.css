@@ -39,6 +39,13 @@ header {
   margin-left: 1px;
 }
 
+
+.logout-icon {
+  width: 25px;
+  height: 25px;
+  margin-left: 1px;
+}
+
 /* Estilização adicional para a aba do carrinho */
 .cart-items {
   position: absolute;

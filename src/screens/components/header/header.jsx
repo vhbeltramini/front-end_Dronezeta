@@ -45,10 +45,10 @@ function Header() {
               <img src={profileIcon} className="profile-icon" alt="Ícone do Perfil" />
             </div>
             <div className="logout-icon" onClick={handleLogout}>
-              <img src={logoutIcon} className="profile-icon" alt="Ícone do Perfil" />
+              <img src={logoutIcon} className="logout-icon" alt="Sair" />
             </div>
           </>
-        )}
+        )}  
         
       </div>
     </header>
