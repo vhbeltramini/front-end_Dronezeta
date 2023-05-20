@@ -33,6 +33,7 @@ const Produtos = () => {
       nome: produtoSelecionado.name,
       preco: produtoSelecionado.price,
       tamanho: tamanhoSelecionado,
+      quantidade: 1,
     };
 
     const updatedCart = [...cart, novoItem];

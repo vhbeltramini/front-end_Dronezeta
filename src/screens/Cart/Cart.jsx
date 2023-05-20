@@ -16,16 +16,14 @@ class CarrinhoDeCompra extends React.Component {
       // Atualiza a quantidade do produto existente
       const produtosAtualizados = this.state.produtos.map(p => {
         if (p.id === produto.id) {
-          return { ...p, quantidade: p.quantidade + 1 };
+          p.quantidade += 1;
         }
         return p;
       });
       this.setState({ produtos: produtosAtualizados });
-    } else {
-      // Adiciona o novo produto ao carrinho
-      const novoProduto = { ...produto, quantidade: 1 };
-      this.setState({ produtos: [...this.state.produtos, novoProduto] });
     }
+    localStorage.removeItem('cart');
+    localStorage.setItem('cart', JSON.stringify(this.state.produtos));
   }
 
   removerProduto = (produto) => {
@@ -35,8 +33,13 @@ class CarrinhoDeCompra extends React.Component {
       // Verifica a quantidade do produto existente
       if (produtoExistente.quantidade === 1) {
         // Remove o produto do carrinho se a quantidade for 1
-        const produtosAtualizados = this.state.produtos.filter(p => p.id !== produto.id);
-        this.setState({ produtos: produtosAtualizados });
+        this.setState((prevState) => {
+          const produtosAtualizados = prevState.produtos.filter((p) => p.id !== produto.id);
+          return { produtos: produtosAtualizados };
+        });
+        if (this.state.produtos.length == 0){
+          this.setState({ produtos: [] });
+        }
       } else {
         // Atualiza a quantidade do produto existente
         const produtosAtualizados = this.state.produtos.map(p => {
@@ -48,6 +51,9 @@ class CarrinhoDeCompra extends React.Component {
         this.setState({ produtos: produtosAtualizados });
       }
     }
+    localStorage.removeItem('cart');
+    localStorage.setItem('cart', JSON.stringify(this.state.produtos));
+    console.log(this.state.produtos)
   }
 
   confirmarCompra = () => {
@@ -68,7 +74,7 @@ class CarrinhoDeCompra extends React.Component {
                 {produtos.map(produto => (
                     <li key={produto.id}>
                     {produto.nome} - R${produto.preco.toFixed(2)} - Quantidade: {produto.quantidade}
-                    <button onClick={() => this.adicionarProduto(produto)}>Adicionar</button>
+                    <button onClick={() => this.adicionarProduto(produto)}>+</button>
                     <button onClick={() => this.removerProduto(produto)}>Remover</button>
                     </li>
                 ))}
