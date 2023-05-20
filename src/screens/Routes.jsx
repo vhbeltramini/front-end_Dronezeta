@@ -4,6 +4,7 @@ import StartScreen from "./StartScreen/StartScreen";
 import HomeScreen from "./HomeScreen";
 import ProductListScreen from "./ProductListScreen/ProductListScreen";
 import CreateUser from "./CreateUser/CreateUser";
+import CreateProduct from "./CreateProduct/CreateProduct";
 
 
 export default function DronezetaRoutes() {
@@ -16,6 +17,7 @@ export default function DronezetaRoutes() {
             <Route path='/inicio' element={<StartScreen />}></Route>
             <Route path='/products' element={<ProductListScreen />}></Route>
             <Route path='/createUser' element={<CreateUser />}></Route>
+            <Route path='/createProduct' element={<CreateProduct />}></Route>
 
             <Route path='*' element={<HomeScreen />}></Route>
           </Routes>
