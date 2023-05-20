@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { ApiContext } from './../components/ApiContext/ApiProvider';
 import axios from 'axios';
 import "./LoginScreen.css"
 
