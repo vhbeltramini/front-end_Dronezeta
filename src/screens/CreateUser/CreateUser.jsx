@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './CreateUser.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CadastroCliente = () => {
   const [cliente, setCliente] = useState({
@@ -8,7 +9,6 @@ const CadastroCliente = () => {
     lastName: '',
     cpf: '',
     email: '',
-    role: '',
     password: '',
   });
 
@@ -19,17 +19,14 @@ const CadastroCliente = () => {
       [name]: value,
     }));
   };
-
-  const [postData, setPostData] = useState({
-    title: '',
-    body: ''
-  });
-  
   
   function removerPontuacaoCPF(cpf) {
     // Remove todos os pontos e traços do CPF usando expressões regulares
     return cpf.replace(/[.-]/g, '');
   }
+
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,13 +34,19 @@ const CadastroCliente = () => {
     // Lógica para enviar os dados do cliente ao servidor ou fazer qualquer outra ação necessária
     // ...
     
-    cliente.role = 'client';
     let formatedCPF = removerPontuacaoCPF(cliente.cpf);
     cliente.cpf = formatedCPF;
 
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer your_token_here'
+    };
+    
+
     const request = {
       url: "http://localhost:8080/login/users",
-      mode: 'no-cors',
+      mode: "no-cors",
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -57,12 +60,19 @@ const CadastroCliente = () => {
     
     
     try {
-      const response = await axios.post(request.url, request);
+      const response = await axios.post(request.url, JSON.stringify(cliente), { headers });
       
-      if (response.ok) {
+      if (response.status == 201) {
         console.log('POST request successful');
+
+        alert("Usuário criado com sucesso")
+        navigate('/login');
+      
+
       } else {
         console.log('POST request failed');
+        alert("Houve um problema ao criar o usuário")
+
         console.log(response);
       }
 
