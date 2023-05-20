@@ -14,7 +14,7 @@ const ProductForm = () => {
   };
 
   const handlePhotoUrlChange = (event) => {
-    setPhotoUrl(event.target.files[0]);
+    setPhotoUrl(event.target.value);
   };
 
   const handleSizeChange = (event) => {
@@ -56,11 +56,11 @@ const ProductForm = () => {
       console.error('Error occurred during POST request:', error);
     }
 
-    setName('');
-    setPhotoUrl(null);
-    setSize('');
-    setPrice('');
-    setQuantity('');
+    // setName('');
+    // setPhotoUrl(null);
+    // setSize('');
+    // setPrice('');
+    // setQuantity('');
   };
 
   return (
@@ -72,7 +72,7 @@ const ProductForm = () => {
         </div>
         <div>
           <label htmlFor="photoUrl">Imagem:</label>
-          <input type="file" id="photoUrl" onChange={handlePhotoUrlChange} />
+          <input type="text" id="photoUrl" value ={photoUrl} onChange={handlePhotoUrlChange} />
         </div>
         <div>
           <label htmlFor="size">Tamanho:</label>
