@@ -27,33 +27,28 @@ class CarrinhoDeCompra extends React.Component {
   }
 
   removerProduto = (produto) => {
-    // Verifica se o produto já está no carrinho
-    const produtoExistente = this.state.produtos.find(p => p.id === produto.id);
+    const { produtos } = this.state;
+
+    const produtoExistente = produtos.find(p => p.id === produto.id);
     if (produtoExistente) {
-      // Verifica a quantidade do produto existente
       if (produtoExistente.quantidade === 1) {
-        // Remove o produto do carrinho se a quantidade for 1
-        this.setState((prevState) => {
-          const produtosAtualizados = prevState.produtos.filter((p) => p.id !== produto.id);
-          return { produtos: produtosAtualizados };
+        const produtosAtualizados = produtos.filter(p => p.id !== produto.id);
+        this.setState({ produtos: produtosAtualizados }, () => {
+          localStorage.setItem('cart', JSON.stringify(produtosAtualizados));
         });
-        if (this.state.produtos.length == 0){
-          this.setState({ produtos: [] });
-        }
       } else {
-        // Atualiza a quantidade do produto existente
-        const produtosAtualizados = this.state.produtos.map(p => {
+        const produtosAtualizados = produtos.map(p => {
           if (p.id === produto.id) {
             return { ...p, quantidade: p.quantidade - 1 };
           }
           return p;
         });
-        this.setState({ produtos: produtosAtualizados });
+        this.setState({ produtos: produtosAtualizados }, () => {
+          localStorage.setItem('cart', JSON.stringify(produtosAtualizados));
+        });
       }
     }
-    localStorage.removeItem('cart');
-    localStorage.setItem('cart', JSON.stringify(this.state.produtos));
-    console.log(this.state.produtos)
+    console.log(this.state.produtos);
   }
 
   confirmarCompra = () => {
