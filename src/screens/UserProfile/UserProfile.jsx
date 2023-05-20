@@ -5,25 +5,35 @@ import './UserProfile.css';
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [editedUser, setEditedUser] = useState(null);
-    const LoggedUser = localStorage.getItem('user');
+    const LoggedUser = JSON.parse(localStorage.getItem("user"));
 
-    //console.log(LoggedUser)
     useEffect(() => {
+    let isMounted = true; // Flag to track component mount status
+    let previousUserId = null; // Variable to store the previously fetched user ID
+      
         const fetchUser = async () => {
-        try {
+          try {
             const response = await axios.get(`http://localhost:8080/users/${LoggedUser.id}`);
-            console.log(response.data)
-            setUser(response.data);
-            setEditedUser(response.data);
-        } catch (error) {
+            if (isMounted) {
+              setUser(response.data);
+              setEditedUser(response.data);
+            }
+          } catch (error) {
             console.error('Error occurred while fetching user:', error);
-        }
+          }
         };
-
-        if (LoggedUser) {
-            fetchUser();
+      
+        if (user == null || user != null && user.id && user.id !== previousUserId) {
+          fetchUser();
+          previousUserId = LoggedUser.id; // Update the previous user ID
         }
-    }, [LoggedUser]);
+      
+        return () => {
+          isMounted = false; // Clean up: set isMounted to false on component unmount
+        };
+      }, [LoggedUser]);
+      
+      
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;

@@ -24,6 +24,11 @@
   color: white;
 }
 
+.App-footer {
+  margin-top: auto;
+
+}
+
 .App-link {
   color: #61dafb;
 }
