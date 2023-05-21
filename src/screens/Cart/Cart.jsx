@@ -52,6 +52,7 @@ class CarrinhoDeCompra extends React.Component {
   }
 
   confirmarCompra = () => {
+    window.location.href = "/paymentForm";
     // Lógica para confirmar a compra
     //this.props.history.push('/endereco');
   }

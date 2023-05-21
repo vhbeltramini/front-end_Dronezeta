@@ -27,7 +27,6 @@ const CadastroCliente = () => {
 
   const navigate = useNavigate();
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Dados do cliente:', JSON.stringify(cliente));
@@ -37,13 +36,11 @@ const CadastroCliente = () => {
     let formatedCPF = removerPontuacaoCPF(cliente.cpf);
     cliente.cpf = formatedCPF;
 
-
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer your_token_here'
     };
     
-
     const request = {
       url: "http://localhost:8080/login/users",
       mode: "no-cors",
@@ -81,7 +78,6 @@ const CadastroCliente = () => {
     }
   };
   
-
   return (
     <div className='container'>
       <h1>Cadastro de Cliente</h1>

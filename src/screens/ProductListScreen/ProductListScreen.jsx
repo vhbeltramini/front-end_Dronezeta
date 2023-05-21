@@ -72,6 +72,7 @@ const Produtos = () => {
       <h1>Produtos</h1>
       <div className="buttons">
         {LoggedUser && LoggedUser.role == 'ADMIN' &&  <a href="/createProduct" className="header-button">Adicionar produtos</a>}
+        {LoggedUser && LoggedUser.role == 'ADMIN' &&  <a href="/deleteProduct" className="header-button">Deletar produtos</a>}
       </div>
       <div className="produtos-grid">
         {produtos.map((produto) => (
