@@ -11,6 +11,7 @@ import AddressForm from "./AddressForm/AddressForm";
 import UserProfile from "./UserProfile/UserProfile";
 import UserManagement from "./UserManagement/UserManagement";
 import DeleteProduct from "./DeleteProduct/DeleteProduct";
+import MyOrders from "./MyOrders/MyOrders";
 
 export default function DronezetaRoutes() {
     return (
@@ -26,6 +27,7 @@ export default function DronezetaRoutes() {
             <Route path='/cart' element={<Cart />}></Route>
             <Route path='/userManagement' element={<UserManagement />}></Route>
             <Route path='/deleteProduct' element={<DeleteProduct />}></Route>
+            <Route path='/my-orders' element={<MyOrders />}></Route>
             <Route path='/paymentForm' element={<PaymentForm />}></Route>
             <Route path='/addressForm' element={<AddressForm />}></Route>
             <Route path='/userProfile' element={<UserProfile />}></Route>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import './DeleteProduct.css';
+import './MyOrders.css';
 
 
 const MyOrders = () => {
@@ -10,30 +10,22 @@ const MyOrders = () => {
   const LoggedUser = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/products');
+        const response = await axios.get(`http://localhost:8080/orders/user/${LoggedUser.id}`);
         console.log(response.data);
         setOrders(response.data);
+        setOrders(orders.sort((a, b) => a.totalValue - b.totalValue))
+
       } catch (error) {
         console.error('Error occurred while fetching users:', error);
       }
     };
 
-    fetchUsers();
+    fetchOrders();
   }, []);
 
-  async function removerProduto(product) {
-    try {
-      const response = await axios.delete(`http://localhost:8080/products/${product.id}`);
-      console.log(response.data);
-      alert("Produto deletado");
-      window.location.reload();
-
-    } catch (error) {
-      console.error('Error occurred while deleting products:', error);
-    }
-  }
+  
 
   // if (LoggedUser != null && LoggedUser.role != 'ADMIN') {
   //   return (
@@ -44,18 +36,30 @@ const MyOrders = () => {
   //     </div>
   //   )
   // }
+  if (orders == null || orders.length == 0) {
+    return (
+      <div className="container">
+        <div className="message">
+          <h1>Você não possui ordens de compras</h1>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className='container'>
       <h2>Histórico de Pedidos</h2>
-        <div className='users-controls-buttons'>
-          <a href="/createProduct" className="header-button">Criar Produto</a>
-        </div>
         <div>
             <ul>
-            {orders.map(product => (
-                <li key={product.id}>
-                {product.name} | R$ {product.price}  
-                <button onClick={() => removerProduto(product)}>Deletar</button>
+            {orders.map(orders => (
+                <li key={orders.id}>
+                N de Produtos : {orders.productsQuantity} | Valor total: {orders.totalValue}  
+                </li>
+            ))}
+            </ul>
+            <ul>
+            {orders.map(orders => (
+                <li key={orders.id}>
+                Data {orders.data}
                 </li>
             ))}
             </ul>

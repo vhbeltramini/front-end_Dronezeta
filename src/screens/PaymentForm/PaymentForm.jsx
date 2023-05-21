@@ -4,8 +4,8 @@ import axios from 'axios';
 
 function PaymentForm() {
     const [cardNumber, setCardNumber] = useState('');
-    const [cardName, setCardName] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
+    const [cardHolderName, setCardName] = useState('');
+    const [validDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
     const [paymentMethods, setPaymentMethods] = useState([]);
     const user = JSON.parse(localStorage.getItem('user'));
@@ -103,7 +103,7 @@ function PaymentForm() {
                     Nome no Cartão:
                     <input
                         type="text"
-                        value={cardName}
+                        value={cardHolderName}
                         onChange={handleCardNameChange}
                     />
                 </label>
@@ -111,7 +111,7 @@ function PaymentForm() {
                     Data de Expiração:
                     <input
                         type="text"
-                        value={expiryDate}
+                        value={validDate}
                         onChange={handleExpiryDateChange}
                     />
                 </label>
