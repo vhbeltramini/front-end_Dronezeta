@@ -64,65 +64,76 @@ const ProfilePage = () => {
         return <div>Loading...</div>;
     }
 
+
+
     return (
-        <div className='profile-container'>
-            <h1>Profile</h1>
-            <label>
-                First Name:
-                <input
-                type="text"
-                name="firstName"
-                value={editedUser.firstName}
-                onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Last Name:
-                <input
-                type="text"
-                name="lastName"
-                value={editedUser.lastName}
-                onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                CPF:
-                <input
-                type="text"
-                name="cpf"
-                value={editedUser.cpf}
-                onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Email:
-                <input
-                type="email"
-                name="email"
-                value={editedUser.email}
-                onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Address:
-                <input
-                type="text"
-                name="address"
-                value={editedUser.address}
-                onChange={handleInputChange}
-                />
-            </label>
-            <label>
-                Delivery Address:
-                <input
-                type="text"
-                name="deliveryAddress"
-                value={editedUser.deliveryAddress}
-                onChange={handleInputChange}
-                />
-            </label>
-            <button onClick={saveChanges}>Atualizar informações</button>
+
+
+      <div className='profile-wrapper' >
+          <div className='users-controls-buttons'>
+            {LoggedUser && LoggedUser.role && LoggedUser.role == 'ADMIN' && <a href="/userManagement" className="header-button">Gerenciar Usuários</a>}
+          </div>
+          <div className='profile-container'>
+              <h1>Profile</h1>
+              <label>
+                  First Name:
+                  <input
+                  type="text"
+                  name="firstName"
+                  value={editedUser.firstName}
+                  onChange={handleInputChange}
+                  />
+              </label>
+              <label>
+                  Last Name:
+                  <input
+                  type="text"
+                  name="lastName"
+                  value={editedUser.lastName}
+                  onChange={handleInputChange}
+                  />
+              </label>
+              <label>
+                  CPF:
+                  <input
+                  type="text"
+                  name="cpf"
+                  value={editedUser.cpf}
+                  onChange={handleInputChange}
+                  />
+              </label>
+              <label>
+                  Email:
+                  <input
+                  type="email"
+                  name="email"
+                  value={editedUser.email}
+                  onChange={handleInputChange}
+                  />
+              </label>
+              <label>
+                  Address:
+                  <input
+                  type="text"
+                  name="address"
+                  value={editedUser.address}
+                  onChange={handleInputChange}
+                  />
+              </label>
+              <label>
+                  Delivery Address:
+                  <input
+                  type="text"
+                  name="deliveryAddress"
+                  value={editedUser.deliveryAddress}
+                  onChange={handleInputChange}
+                  />
+              </label>
+              <button onClick={saveChanges}>Atualizar informações</button>
+          </div>
         </div>
+
+
     );
 };
 
