@@ -48,8 +48,8 @@ function PaymentForm() {
             //gravar forma de pagamento
             const response = await axios.post('http://localhost:8080/payment-methods/create', {
                 cardNumber,
-                cardName,
-                expiryDate,
+                cardHolderName,
+                validDate,
                 cvv,
                 id: user.id
             });
