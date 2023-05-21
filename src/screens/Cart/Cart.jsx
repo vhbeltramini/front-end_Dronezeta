@@ -1,7 +1,6 @@
 import React from 'react';
 import './Cart.css';
 
-
 class CarrinhoDeCompra extends React.Component {
   constructor(props) {
     super(props);
@@ -53,6 +52,7 @@ class CarrinhoDeCompra extends React.Component {
   }
 
   confirmarCompra = () => {
+    window.location.href = "/paymentForm";
     // Lógica para confirmar a compra
     //this.props.history.push('/endereco');
   }
